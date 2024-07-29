@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.0'
+}
+
+group = 'eu.unchat.uhc'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url = uri('https://repo.panda-lang.org/releases')
+    }
+}
+
+dependencies {
+    compileOnly "dev.rollczi:litecommands-bukkit:3.4.2"
+    compileOnly "dev.rollczi:litecommands-adventure:3.4.1"
+    compileOnly "net.kyori:adventure-api:4.17.0"
+    compileOnly "eu.unchat.uhc:uhc-api:0.0.2"
+    compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
+    compileOnly "org.jetbrains:annotations:24.0.1"
+    compileOnly "org.projectlombok:lombok:1.18.30"
+    annotationProcessor "org.projectlombok:lombok:1.18.30"
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+shadowJar {
+    destinationDirectory.set(file("C:\\Users\\livre\\Desktop\\Test\\plugins"))
+}
