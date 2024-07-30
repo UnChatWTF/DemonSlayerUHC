@@ -13,14 +13,14 @@ public final class NezukoRole extends AbstractRole {
     }
 
     @Override
-    public void onNight(Player player) {
-        IProfile profile = IProfile.of(player.getUniqueId());
-        profile.setStrengthBuffer(profile.getStrengthBuffer() + 20);
-    }
-
-    @Override
     public void onDay(Player player) {
         IProfile profile = IProfile.of(player.getUniqueId());
         profile.setStrengthBuffer(profile.getStrengthBuffer() - 20);
+    }
+
+    @Override
+    public void onNight(Player player) {
+        IProfile profile = IProfile.of(player.getUniqueId());
+        profile.setStrengthBuffer(profile.getStrengthBuffer() + 20);
     }
 }
