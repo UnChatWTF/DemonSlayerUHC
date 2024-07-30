@@ -8,19 +8,19 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.function.Consumer;
 
-public final class YellowBlade implements IBlade {
+public final class GrayBlade implements IBlade {
     @Override
     public ItemStack getDisplay() {
         return new ItemBuilder(Material.INK_SACK)
-                .name("&e&lLame jaune")
-                .lore("&rVous octroie &l15% &rde chance de faire", "&rapparaître un éclair sur un joueur", "&rlorsque vous lui infligez des dégâts.")
+                .name("&7&lLame grise")
+                .lore("&rVous octroie un bonus de &l10% &rde &7&lRésistance&r.")
                 .asItemStack();
     }
 
     @Override
     public Consumer<IProfile> apply() {
         return (profile -> {
-            profile.setData("lightningChance", 15);
+            profile.setResistanceBuffer(profile.getResistanceBuffer() + 10);
         });
     }
 }
