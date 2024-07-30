@@ -18,7 +18,7 @@ dependencies {
     compileOnly "dev.rollczi:litecommands-bukkit:3.4.2"
     compileOnly "dev.rollczi:litecommands-adventure:3.4.1"
     compileOnly "net.kyori:adventure-api:4.17.0"
-    compileOnly "eu.unchat.uhc:uhc-api:0.0.2"
+    compileOnly "eu.unchat.uhc:uhc-api:0.0.3"
     compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
     compileOnly "org.jetbrains:annotations:24.0.1"
     compileOnly "org.projectlombok:lombok:1.18.30"
