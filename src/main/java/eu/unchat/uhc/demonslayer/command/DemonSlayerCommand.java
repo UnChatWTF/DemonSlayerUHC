@@ -1,10 +1,16 @@
-package eu.unchat.uhc.demonslayer.command;import dev.rollczi.litecommands.annotations.command.Command;
+package eu.unchat.uhc.demonslayer.command;
+
+import dev.rollczi.litecommands.annotations.argument.Arg;
+import dev.rollczi.litecommands.annotations.command.Command;
 import dev.rollczi.litecommands.annotations.context.Context;
 import dev.rollczi.litecommands.annotations.execute.Execute;
 import eu.unchat.uhc.API;
 import eu.unchat.uhc.cycle.Cycle;
 import eu.unchat.uhc.demonslayer.command.validator.role.HasRole;
+import eu.unchat.uhc.demonslayer.command.validator.team.HasTeam;
+import eu.unchat.uhc.demonslayer.role.defaults.demon.MuzanRole;
 import eu.unchat.uhc.demonslayer.role.defaults.slayer.TanjiroRole;
+import eu.unchat.uhc.demonslayer.team.defaults.DemonTeam;
 import eu.unchat.uhc.power.AbstractPower;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.role.AbstractRole;
@@ -25,22 +31,7 @@ public final class DemonSlayerCommand {
         AbstractRole role = profile.getRole();
         AbstractPower power = role.getPower(TanjiroRole.FlairPower.class);
 
-        if (power == null) {
-            return;
-        }
-
-        if (power.getState() == AbstractPower.State.LOCKED) {
-            player.sendMessage(CC.error("Ce pouvoir est bloqué."));
-            return;
-        }
-
-        if (power.getUses() >= power.getInitialUses()) {
-            player.sendMessage(CC.error("Vous ne pouvez plus utiliser ce pouvoir."));
-            return;
-        }
-
-        if (power.getCooldown().isRunning()) {
-            player.sendMessage(CC.error("Veuillez patienter " + power.getCooldown().getDuration() + "s avant de réutiliser ce pouvoir."));
+        if (power == null || !power.execute(player)) {
             return;
         }
 
@@ -49,15 +40,22 @@ public final class DemonSlayerCommand {
             return;
         }
 
-        if (power.getInitialUses() != -1) {
-            power.setUses(power.getUses() + 1);
-        }
-
-        if (power.getInitialCooldown() != -1) {
-            power.getCooldown().start(player);
-        }
-
         player.sendMessage(CC.translate("&cTest !"));
+    }
+
+    @Execute(name = "blood")
+    void executeBloodGift(
+            final @Context @HasRole(MuzanRole.class) Player player,
+            @Arg("target") @HasTeam(DemonTeam.class) IProfile target) {
+
+        IProfile profile = IProfile.of(player.getUniqueId());
+        AbstractRole role = profile.getRole();
+        AbstractPower power = role.getPower(MuzanRole.BloodGiftPower.class);
+
+        if (power == null || !power.execute(player)) {
+            return;
+        }
+
     }
 
 }
