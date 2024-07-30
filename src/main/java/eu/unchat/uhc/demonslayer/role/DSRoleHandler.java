@@ -14,6 +14,7 @@ public final class DSRoleHandler {
         registerRole(ZenitsuRole.class);
         registerRole(InosukeRole.class);
         registerRole(NezukoRole.class);
+        registerRole(GiyuRole.class);
     }
 
     private void registerRole(final Class<? extends AbstractRole> clazz) {
