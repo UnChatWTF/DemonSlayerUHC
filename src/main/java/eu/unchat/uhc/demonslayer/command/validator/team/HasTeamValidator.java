@@ -1,4 +1,4 @@
-package eu.unchat.uhc.demonslayer.command.validator.role;
+package eu.unchat.uhc.demonslayer.command.validator.team;
 
 import dev.rollczi.litecommands.annotations.validator.requirment.AnnotatedValidator;
 import dev.rollczi.litecommands.command.executor.CommandExecutor;
@@ -8,28 +8,29 @@ import dev.rollczi.litecommands.validator.ValidatorResult;
 import eu.unchat.uhc.API;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.team.AbstractTeam;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 
-public final class HasRoleValidator implements AnnotatedValidator<CommandSender, Player, HasRole> {
+public final class HasTeamValidator implements AnnotatedValidator<CommandSender, Player, HasTeam> {
     @Override
     public ValidatorResult validate(
             Invocation<CommandSender> invocation,
             CommandExecutor<CommandSender> executor,
             Requirement<Player> requirement,
             Player player,
-            HasRole hasRole
+            HasTeam hasTeam
     ) {
         IProfile profile = IProfile.of(player.getUniqueId());
 
-        if (profile.getRole() == null) {
-            return ValidatorResult.invalid("Vous n'avez pas de rôle.");
+        if (profile.getTeam() == null) {
+            return ValidatorResult.invalid("&cVous n'avez pas de camp.");
         }
 
-        if (Arrays.stream(hasRole.value()).noneMatch(clazz -> AbstractRole.isRole(profile, clazz))) {
-            return ValidatorResult.invalid("Vous ou le joueur ciblé n'avez pas le rôle requis.");
+        if (Arrays.stream(hasTeam.value()).noneMatch(clazz -> AbstractTeam.isTeam(profile, clazz))) {
+            return ValidatorResult.invalid("&cVous ou le joueur ciblé n'avez pas le camp requis.");
         }
 
         return ValidatorResult.valid();
