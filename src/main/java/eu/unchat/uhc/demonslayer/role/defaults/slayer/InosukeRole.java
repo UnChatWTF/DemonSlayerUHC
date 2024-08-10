@@ -4,9 +4,10 @@ import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.role.AbstractRole;
 import eu.unchat.uhc.role.Role;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-@Role(name = "Inosuke", identifier = "inosuke", team = SlayerTeam.class)
+@Role(name = "Inosuke", identifier = "inosuke", team = SlayerTeam.class, material = Material.GRILLED_PORK)
 public final class InosukeRole extends AbstractRole {
     @Override
     public void onDay(Player player) {
