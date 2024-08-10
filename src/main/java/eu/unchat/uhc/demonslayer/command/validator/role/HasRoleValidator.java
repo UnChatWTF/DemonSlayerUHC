@@ -5,7 +5,6 @@ import dev.rollczi.litecommands.command.executor.CommandExecutor;
 import dev.rollczi.litecommands.invocation.Invocation;
 import dev.rollczi.litecommands.requirement.Requirement;
 import dev.rollczi.litecommands.validator.ValidatorResult;
-import eu.unchat.uhc.API;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.role.AbstractRole;
 import org.bukkit.command.CommandSender;

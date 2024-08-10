@@ -1,6 +1,5 @@
 package eu.unchat.uhc.demonslayer.command.validator.team;
 
-import eu.unchat.uhc.role.AbstractRole;
 import eu.unchat.uhc.team.AbstractTeam;
 
 import java.lang.annotation.ElementType;
