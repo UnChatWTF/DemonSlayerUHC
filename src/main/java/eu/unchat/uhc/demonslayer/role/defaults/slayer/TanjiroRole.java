@@ -1,37 +1,36 @@
 package eu.unchat.uhc.demonslayer.role.defaults.slayer;
 
-import eu.unchat.uhc.API;
-import eu.unchat.uhc.actionbar.IActionBar;
-import eu.unchat.uhc.demonslayer.DSPlugin;
+import eu.unchat.uhc.demonslayer.power.slayer.tanjiro.BlueParadisePower;
+import eu.unchat.uhc.demonslayer.power.slayer.tanjiro.SmellPower;
+import eu.unchat.uhc.demonslayer.power.slayer.tanjiro.SwirlPower;
 import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.AbstractCommandPower;
-import eu.unchat.uhc.power.AbstractItemPower;
-import eu.unchat.uhc.power.AbstractPower;
-import eu.unchat.uhc.profile.IProfile;
+import eu.unchat.uhc.power.AbstractParentPower;
 import eu.unchat.uhc.role.AbstractRole;
 import eu.unchat.uhc.role.Role;
-import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
-@Role(name = "Tanjiro", identifier = "tanjiro", team = SlayerTeam.class)
+@Role(name = "Tanjiro", identifier = "tanjiro", team = SlayerTeam.class, material = Material.BLAZE_POWDER)
 public final class TanjiroRole extends AbstractRole {
     public TanjiroRole() {
-        registerPower(new FlairPower());
+        registerPower(new SmellPower());
+        registerPower(new IntegralConcentrationBreathPower());
+    }
+
+    @Override
+    public String getDescription(Player player) {
+        return "<gray>Vous êtes <b><green>Tanjiro</green></b>.<newline>Vous devez gagner avec les <b><green>Slayers</green></b>.</gray><newline><newline>";
     }
 
     @Getter
-    public static final class FlairPower extends AbstractPower {
+    private static final class IntegralConcentrationBreathPower extends AbstractParentPower {
         private final String name;
-        private final int initialCooldown, initialUses;
 
-        public FlairPower() {
-            this.name = "&a&lFlair";
-            this.initialCooldown = 20 * 60;
-            this.initialUses = 3;
+        public IntegralConcentrationBreathPower() {
+            this.name = "&a&lSOUFFLE";
+            registerChild(new SwirlPower());
+            registerChild(new BlueParadisePower());
         }
     }
 }
