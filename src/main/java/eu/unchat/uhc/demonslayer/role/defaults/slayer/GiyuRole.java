@@ -13,10 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
-@Role(name = "Giyu", identifier = "giyu", team = SlayerTeam.class)
+@Role(name = "Giyu", identifier = "giyu", team = SlayerTeam.class, material = Material.WATER_LILY)
 public final class GiyuRole extends AbstractRole {
     public GiyuRole() {
-        registerPower(new AccalmiePower());
+        registerPower(new DeadCalmPower());
         registerPower(new RisingTidePower());
     }
 
@@ -32,15 +32,15 @@ public final class GiyuRole extends AbstractRole {
     }
 
     @Getter
-    private static final class AccalmiePower extends AbstractItemPower {
+    private static final class DeadCalmPower extends AbstractItemPower {
         private final String name;
 
         private final int initialCooldown, initialUses;
 
         private final ClickType clickType;
 
-        public AccalmiePower() {
-            this.name = "&a&lAccalmie";
+        public DeadCalmPower() {
+            this.name = "&a&lDEAD CALM";
             this.initialCooldown = 0;
             this.initialUses = 1;
             this.clickType = ClickType.RIGHT_CLICK;
@@ -69,7 +69,7 @@ public final class GiyuRole extends AbstractRole {
         private final ClickType clickType;
 
         public RisingTidePower() {
-            this.name = "&a&lRising Tide";
+            this.name = "&a&lRISING TIDE";
             this.initialCooldown = 10 * 60;
             this.initialUses = -1;
             this.clickType = ClickType.RIGHT_CLICK;
