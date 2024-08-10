@@ -8,6 +8,7 @@ import eu.unchat.uhc.API;
 import eu.unchat.uhc.cycle.Cycle;
 import eu.unchat.uhc.demonslayer.command.validator.role.HasRole;
 import eu.unchat.uhc.demonslayer.command.validator.team.HasTeam;
+import eu.unchat.uhc.demonslayer.power.slayer.tanjiro.SmellPower;
 import eu.unchat.uhc.demonslayer.role.defaults.demon.MuzanRole;
 import eu.unchat.uhc.demonslayer.role.defaults.slayer.TanjiroRole;
 import eu.unchat.uhc.demonslayer.team.defaults.DemonTeam;
@@ -29,7 +30,7 @@ public final class DemonSlayerCommand {
     void executeFlair(final @Context @HasRole(TanjiroRole.class) Player player) {
         IProfile profile = IProfile.of(player.getUniqueId());
         AbstractRole role = profile.getRole();
-        AbstractPower power = role.getPower(TanjiroRole.FlairPower.class);
+        AbstractPower power = role.getPower(SmellPower.class);
 
         if (power == null || !power.execute(player)) {
             return;
