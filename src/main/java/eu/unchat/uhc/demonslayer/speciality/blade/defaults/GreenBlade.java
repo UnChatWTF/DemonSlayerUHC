@@ -13,7 +13,7 @@ public final class GreenBlade implements IBlade {
     public ItemStack getDisplay() {
         return new ItemBuilder(Material.INK_SACK)
                 .name("&2&lLame verte")
-                .lore("&rVous octroie un bonus de &l10% &rde &e&lSpeed&r.")
+                .lore("&7Vous octroie un bonus de &e&l10% &7de &e&lSpeed&r.")
                 .asItemStack();
     }
 

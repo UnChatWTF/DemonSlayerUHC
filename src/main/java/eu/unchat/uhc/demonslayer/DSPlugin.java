@@ -40,8 +40,6 @@ public final class DSPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        API.get().getScoreboardHandler().setScoreboardAnimation(new ScoreboardAnimation("@unchatwtf", ChatColor.DARK_AQUA, ChatColor.AQUA));
-
         Bukkit.getScheduler().runTaskLater(this, () -> {
             this.liteCommands = LiteBukkitFactory.builder()
                     .commands(new DemonSlayerCommand())

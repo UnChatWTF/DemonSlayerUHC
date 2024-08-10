@@ -13,7 +13,7 @@ public final class GrayBlade implements IBlade {
     public ItemStack getDisplay() {
         return new ItemBuilder(Material.INK_SACK)
                 .name("&7&lLame grise")
-                .lore("&rVous octroie un bonus de &l10% &rde &7&lRésistance&r.")
+                .lore("&7Vous octroie un bonus de &l10% &7de &7&lRésistance&r.")
                 .asItemStack();
     }
 

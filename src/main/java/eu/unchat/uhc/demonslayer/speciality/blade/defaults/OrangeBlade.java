@@ -13,7 +13,7 @@ public final class OrangeBlade implements IBlade {
     public ItemStack getDisplay() {
         return new ItemBuilder(Material.INK_SACK)
                 .name("&6&lLame orange")
-                .lore("&rVous octroie une réduction de &l50% &rdes dégâts de &6&lfeu&r.")
+                .lore("&7Vous octroie une réduction de &6&l50% &7des dégâts de &6&lfeu&r.")
                 .asItemStack();
     }
 

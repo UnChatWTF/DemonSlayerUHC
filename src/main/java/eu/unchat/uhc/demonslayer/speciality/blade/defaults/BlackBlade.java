@@ -12,8 +12,8 @@ public final class BlackBlade implements IBlade {
     @Override
     public ItemStack getDisplay() {
         return new ItemBuilder(Material.INK_SACK)
-                .name("&0&lLame noire")
-                .lore("&rVous octroie un bonus de &l10% &rde &c&lForce&r.")
+                .name("&c&lLame noire")
+                .lore("&7Vous octroie un bonus de &c&l10% &7de &c&lForce&r.")
                 .asItemStack();
     }
 

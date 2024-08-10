@@ -15,7 +15,7 @@ public final class BlueBlade implements IBlade {
     public ItemStack getDisplay() {
         return new ItemBuilder(Material.INK_SACK)
                 .name("&9&lLame bleue")
-                .lore("&rVous octroie un livre &9&lDepth Strider 1&r.")
+                .lore("&7Vous octroie un livre &9&lDepth Strider 1&r.")
                 .asItemStack();
     }
 

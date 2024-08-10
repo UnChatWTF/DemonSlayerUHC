@@ -1,17 +1,24 @@
 package eu.unchat.uhc.demonslayer.speciality.blade;
 
 import com.google.common.collect.Lists;
+import eu.unchat.uhc.demonslayer.DSPlugin;
 import eu.unchat.uhc.demonslayer.speciality.blade.defaults.*;
+import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
-public final class DSBladeHandler {
+public final class DSBladeHandler implements Listener {
     public static ItemStack ITEM;
     private static DSBladeHandler instance;
     private final List<IBlade> blades;
@@ -21,15 +28,8 @@ public final class DSBladeHandler {
         this.blades = Lists.newArrayList();
         init();
 
-        /*
-        IBlade blade = DSBladeHandler.get().blades.get(ThreadLocalRandom.current().nextInt(DSBladeHandler.get().blades.size()));
-        blade.apply().accept(IProfile.of(player.getUniqueId()));
-        player.getInventory().remove(getIcon(player));
-        player.getInventory().addItem(blade.getDisplay());
-         */
-
         ITEM = new ItemBuilder(Material.NETHER_STAR)
-                .name("§2&lLame de Nichirin")
+                .name("&3&lLame de Nichirin")
                 .lore("&7Clic-droit pour recevoir votre lame")
                 .asItemStack();
 
@@ -43,6 +43,8 @@ public final class DSBladeHandler {
         recipe.setIngredient('S', Material.IRON_SWORD);
 
         Bukkit.addRecipe(recipe);
+
+        Bukkit.getPluginManager().registerEvents(this, DSPlugin.get());
     }
 
     public static DSBladeHandler get() {
@@ -57,6 +59,19 @@ public final class DSBladeHandler {
         registerBlade(GreenBlade.class);
         registerBlade(BlueBlade.class);
         registerBlade(OrangeBlade.class);
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (event.getItem() == null || !event.getItem().isSimilar(ITEM)) {
+            return;
+        }
+
+        IBlade blade = DSBladeHandler.get().blades.get(ThreadLocalRandom.current().nextInt(DSBladeHandler.get().blades.size()));
+        blade.apply().accept(IProfile.of(player.getUniqueId()));
+        player.getInventory().remove(ITEM);
+        player.getInventory().addItem(blade.getDisplay());
     }
 
     @SneakyThrows

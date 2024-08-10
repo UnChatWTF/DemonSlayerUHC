@@ -13,14 +13,14 @@ public final class YellowBlade implements IBlade {
     public ItemStack getDisplay() {
         return new ItemBuilder(Material.INK_SACK)
                 .name("&e&lLame jaune")
-                .lore("&rVous octroie &l15% &rde chance de faire", "&rapparaître un éclair sur un joueur", "&rlorsque vous lui infligez des dégâts.")
+                .lore("&rVous octroie &e&l7% &7de chance de faire", "&7apparaître un &eéclair &7sur un joueur", "&7lorsque vous lui infligez des dégâts.")
                 .asItemStack();
     }
 
     @Override
     public Consumer<IProfile> apply() {
         return (profile -> {
-            profile.setData("lightningChance", 15);
+            profile.setData("lightningChance", 7);
         });
     }
 }
