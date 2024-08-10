@@ -8,11 +8,12 @@ import org.bukkit.ChatColor;
 @Module(
         name = "Demon Slayer",
         version = "0.0.1",
-        authors = {"UnChat_"},
-        gameDesigners = "UnChat_",
-        developers = "UnChat_",
-        primaryColor = ChatColor.DARK_GREEN,
-        secondaryColor = ChatColor.DARK_RED
+        authors = {"UnChat"},
+        gameDesigners = "UnChat",
+        developers = "UnChat",
+        primaryColor = ChatColor.DARK_AQUA,
+        secondaryColor = ChatColor.AQUA,
+        glassColor = 9
 )
 public final class DS extends AbstractModule {
     @Override
