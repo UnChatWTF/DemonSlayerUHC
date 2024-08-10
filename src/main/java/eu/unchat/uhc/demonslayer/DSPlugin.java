@@ -1,5 +1,6 @@
 package eu.unchat.uhc.demonslayer;
 
+import ca.kaxx.board.animation.ScoreboardAnimation;
 import dev.rollczi.litecommands.LiteCommands;
 import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
 import eu.unchat.uhc.API;
@@ -15,6 +16,7 @@ import eu.unchat.uhc.demonslayer.role.DSRoleHandler;
 import eu.unchat.uhc.demonslayer.team.DSTeamHandler;
 import eu.unchat.uhc.profile.IProfile;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,8 +34,14 @@ public final class DSPlugin extends JavaPlugin {
         new DSRoleHandler();
     }
 
+    public static DSPlugin get() {
+        return instance;
+    }
+
     @Override
     public void onEnable() {
+        API.get().getScoreboardHandler().setScoreboardAnimation(new ScoreboardAnimation("@unchatwtf", ChatColor.DARK_AQUA, ChatColor.AQUA));
+
         Bukkit.getScheduler().runTaskLater(this, () -> {
             this.liteCommands = LiteBukkitFactory.builder()
                     .commands(new DemonSlayerCommand())
@@ -49,9 +57,5 @@ public final class DSPlugin extends JavaPlugin {
 
         API.get().getModuleHandler().registerModule(DS.class);
         API.get().getModuleHandler().setCurrentModule(DS.class);
-    }
-
-    public static DSPlugin get() {
-        return instance;
     }
 }
