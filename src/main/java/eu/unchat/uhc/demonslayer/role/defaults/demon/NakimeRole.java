@@ -9,9 +9,14 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+@Getter
 @Role(name = "Nakime", identifier = "nakime", team = DemonTeam.class, material = Material.MAGMA_CREAM)
 public final class NakimeRole extends AbstractRole {
+    private final String tolgeeReference;
+
     public NakimeRole() {
+        this.tolgeeReference = "fr.unchat.demonslayer.role.nakime";
+
         registerKnownRole(MuzanRole.class);
     }
 

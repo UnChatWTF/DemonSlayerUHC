@@ -11,9 +11,14 @@ import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-@Role(name = "Tanjiro", identifier = "tanjiro", team = SlayerTeam.class, material = Material.BLAZE_POWDER)
+@Getter
+@Role(name = "Tanjiro", identifier = "tanjiro", team = SlayerTeam.class, material = Material.BLAZE_ROD)
 public final class TanjiroRole extends AbstractRole {
+    private final String tolgeeReference;
+
     public TanjiroRole() {
+        this.tolgeeReference = "fr.unchat.demonslayer.role.tanjiro";
+
         registerPower(new SmellPower());
         registerPower(new IntegralConcentrationBreathPower());
     }

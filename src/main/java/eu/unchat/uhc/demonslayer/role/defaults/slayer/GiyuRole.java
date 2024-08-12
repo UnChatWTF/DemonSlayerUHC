@@ -13,9 +13,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
-@Role(name = "Giyu", identifier = "giyu", team = SlayerTeam.class, material = Material.WATER_LILY)
+@Getter
+@Role(name = "Giyu", identifier = "giyu", team = SlayerTeam.class, material = Material.WATER_BUCKET)
 public final class GiyuRole extends AbstractRole {
+    private final String tolgeeReference;
+
     public GiyuRole() {
+        this.tolgeeReference = "fr.unchat.demonslayer.role.giyu";
+
         registerPower(new DeadCalmPower());
         registerPower(new RisingTidePower());
     }
@@ -24,11 +29,9 @@ public final class GiyuRole extends AbstractRole {
     public void onDistribute(Player player) {
         IProfile profile = IProfile.of(player.getUniqueId());
         profile.setSpeedBuffer(profile.getSpeedBuffer() + 0.04F);
-        ItemStack item = new ItemStack(Material.ENCHANTED_BOOK);
-        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
-        meta.addStoredEnchant(Enchantment.DEPTH_STRIDER, 3, false);
-        item.setItemMeta(meta);
-        player.getInventory().addItem(item);
+        player.getInventory().addItem(new ItemBuilder(Material.ENCHANTED_BOOK)
+                .enchant(Enchantment.DEPTH_STRIDER, 3)
+                .asItemStack());
     }
 
     @Getter

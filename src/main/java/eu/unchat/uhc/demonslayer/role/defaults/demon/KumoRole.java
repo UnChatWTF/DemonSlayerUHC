@@ -9,9 +9,14 @@ import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
 
+@Getter
 @Role(name = "Kumo", identifier = "kumo", team = DemonTeam.class, material = Material.STRING)
 public final class KumoRole extends AbstractRole {
+    private final String tolgeeReference;
+
     public KumoRole() {
+        this.tolgeeReference = "fr.unchat.demonslayer.role.kumo";
+
         registerKnownRole(MuzanRole.class);
         registerPower(new SanguinaryPower());
     }

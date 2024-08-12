@@ -14,9 +14,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-@Role(name = "Kyojuro", identifier = "kyojuro", team = SlayerTeam.class, material = Material.BLAZE_ROD)
+@Getter
+@Role(name = "Kyojuro", identifier = "kyojuro", team = SlayerTeam.class, material = Material.FLINT)
 public final class KyojuroRole extends AbstractRole {
+    private final String tolgeeReference;
+
     public KyojuroRole() {
+        this.tolgeeReference = "fr.unchat.demonslayer.role.kyojuro";
+
         registerPower(new IntegralConcentrationBreathPower());
     }
 
