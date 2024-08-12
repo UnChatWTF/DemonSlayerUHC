@@ -8,6 +8,7 @@ import dev.rollczi.litecommands.suggestion.SuggestionContext;
 import dev.rollczi.litecommands.suggestion.SuggestionResult;
 import eu.unchat.uhc.API;
 import eu.unchat.uhc.profile.IProfile;
+import eu.unchat.uhc.util.CC;
 import org.bukkit.command.CommandSender;
 
 public final class ProfileResolver extends ArgumentResolver<CommandSender, IProfile> {
@@ -21,7 +22,7 @@ public final class ProfileResolver extends ArgumentResolver<CommandSender, IProf
                 .orElse(null);
 
         if (found == null) {
-            return ParseResult.failure("&cProfile with name \"" + s + "\" does not exist");
+            return ParseResult.failure(CC.error("Profile with name \"" + s + "\" does not exist"));
         }
 
         return ParseResult.success(found);
