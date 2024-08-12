@@ -1,8 +1,9 @@
 package eu.unchat.uhc.demonslayer;
 
-import ca.kaxx.board.animation.ScoreboardAnimation;
 import dev.rollczi.litecommands.LiteCommands;
+import dev.rollczi.litecommands.adventure.LiteAdventureExtension;
 import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
+import eu.unchat.tolgee.translation.TranslationHandler;
 import eu.unchat.uhc.API;
 import eu.unchat.uhc.demonslayer.command.DemonSlayerCommand;
 import eu.unchat.uhc.demonslayer.command.permission.DSPermissionHandler;
@@ -15,23 +16,28 @@ import eu.unchat.uhc.demonslayer.command.validator.team.HasTeamValidator;
 import eu.unchat.uhc.demonslayer.role.DSRoleHandler;
 import eu.unchat.uhc.demonslayer.team.DSTeamHandler;
 import eu.unchat.uhc.profile.IProfile;
+import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@Getter
 public final class DSPlugin extends JavaPlugin {
 
     private static DSPlugin instance;
-
+    private final DSTeamHandler teamHandler;
+    private final DSRoleHandler roleHandler;
     private LiteCommands<CommandSender> liteCommands;
 
     public DSPlugin() {
         instance = this;
 
-        new DSTeamHandler();
-        new DSRoleHandler();
+        this.teamHandler = new DSTeamHandler();
+        this.roleHandler = new DSRoleHandler();
+
+        TranslationHandler translationHandler = API.get().getTolgeeClient().getTranslationHandler();
+        translationHandler.loadKeys("8997");
     }
 
     public static DSPlugin get() {
@@ -47,6 +53,11 @@ public final class DSPlugin extends JavaPlugin {
                         config.validator(Player.class, HasRole.class, new HasRoleValidator());
                         config.validator(Player.class, HasTeam.class, new HasTeamValidator());
                     })
+                    .extension(new LiteAdventureExtension<>(), configuration -> configuration
+                            .miniMessage(true)
+                            .colorizeArgument(true)
+                            .legacyColor(true)
+                    )
                     .argument(IProfile.class, new ProfileResolver())
                     .invalidUsage(new DSUsageHandler())
                     .missingPermission(new DSPermissionHandler())

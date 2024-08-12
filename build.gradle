@@ -25,6 +25,7 @@ dependencies {
     compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
     compileOnly "org.jetbrains:annotations:24.0.1"
     compileOnly "org.projectlombok:lombok:1.18.30"
+    compileOnly "eu.unchat.tolgee:java-wrapper:0.0.1"
     annotationProcessor "org.projectlombok:lombok:1.18.30"
 }
 
