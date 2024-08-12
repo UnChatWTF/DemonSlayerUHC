@@ -28,6 +28,15 @@ public final class AcidCocoonPower extends AbstractItemPower {
     public ItemStack getIcon() {
         return new ItemBuilder(Material.WEB)
                 .name(this.name)
+                .lore(
+                        "&7Si un joueur se trouve à moins de &b15 blocs &7en face de vous,",
+                        "&7il sera alors enfermé dans un cocon de toile d'araignée qui possède &c100❤&7.",
+                        "&7Tant que le joueur n'a pas brisé le cocon, il perd &b5 &7de durabilité sur chacune",
+                        "&7de ses pièces d'armures, et &c0.5❤ &7toutes les &b4 secondes&7.",
+                        "",
+                        "&c" + CC.DANGER + " Le joueur visé ne peut pas retirer son armure",
+                        "&ctant qu'il est dans le cocon."
+                )
                 .glowing(true)
                 .asItemStack();
     }

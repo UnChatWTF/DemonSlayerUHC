@@ -28,6 +28,12 @@ public final class AcidManipulationPower extends AbstractItemPower {
     public ItemStack getIcon() {
         return new ItemBuilder(Material.SPIDER_EYE)
                 .name(name)
+                .lore(
+                        "&7Si un joueur se trouve à moins de &b15 blocs &7en face de vous,",
+                        "&7vous pouvez alors lui jeter de l'&bacide &7dessus.",
+                        "&7Le joueur perd alors &b40 &7de durabilité sur ses pièces d'armure et",
+                        "&7obtient un effet de &2Poison II &7durant &b4 secondes&7."
+                )
                 .glowing(true)
                 .asItemStack();
     }
