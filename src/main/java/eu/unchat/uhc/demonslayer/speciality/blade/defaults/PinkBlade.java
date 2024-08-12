@@ -21,11 +21,11 @@ public final class PinkBlade implements IBlade {
     @Override
     public Consumer<IProfile> apply() {
         return (profile -> {
-            if (profile.getPlayer().isEmpty()) {
+            if (!profile.isOnline()) {
                 return;
             }
 
-            Player player = profile.getPlayer().get();
+            Player player = profile.getPlayer();
             player.setMaxHealth(player.getMaxHealth() + 4);
             profile.addHealth(4);
         });

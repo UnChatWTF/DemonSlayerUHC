@@ -22,13 +22,15 @@ public final class BlueBlade implements IBlade {
     @Override
     public Consumer<IProfile> apply() {
         return (profile -> {
-            profile.getPlayer().ifPresent(player -> {
-                ItemStack item = new ItemStack(Material.ENCHANTED_BOOK);
-                EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
-                meta.addStoredEnchant(Enchantment.DEPTH_STRIDER, 1, false);
-                item.setItemMeta(meta);
-                player.getInventory().addItem(item);
-            });
+            if (!profile.isOnline()) {
+                return;
+            }
+
+            ItemStack item = new ItemStack(Material.ENCHANTED_BOOK);
+            EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
+            meta.addStoredEnchant(Enchantment.DEPTH_STRIDER, 1, false);
+            item.setItemMeta(meta);
+            profile.getPlayer().getInventory().addItem(item);
         });
     }
 }
