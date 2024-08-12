@@ -13,15 +13,15 @@ import org.bukkit.inventory.ItemStack;
 @Role(name = "Kyogai", identifier = "kyogai", team = SolitaryTeam.class, material = Material.STICK)
 public final class KyogaiRole extends AbstractRole {
     @Getter
-    private static final class TambourPower extends AbstractItemPower {
+    private static final class DrumPower extends AbstractItemPower {
         private final String name;
 
         private final int initialCooldown, initialUses;
 
         private final ClickType clickType;
 
-        public TambourPower() {
-            this.name = "&6&lTambour";
+        public DrumPower() {
+            this.name = "&6&lDRUM";
             this.initialCooldown = 5 * 60;
             this.initialUses = -1;
             this.clickType = ClickType.RIGHT_CLICK;
