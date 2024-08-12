@@ -30,8 +30,9 @@ public final class DakiGyutaroDeathOperation implements IProfileDeathOperation {
 
     @Override
     public void start() {
-        this.profile.getPlayer().ifPresent(player ->
-                player.sendMessage(CC.info("Vous êtes mort, cependant, vous possédez " + announceDelay + "s pour être ressuscité.")));
+        if (profile.isOnline()) {
+            profile.sendMessage(CC.info("Vous êtes mort, cependant, vous possédez " + announceDelay + "s pour être ressuscité."));
+        }
 
         task = getDeathRunnable().runTaskTimer(DSPlugin.get(), 0, 20);
 
@@ -65,7 +66,7 @@ public final class DakiGyutaroDeathOperation implements IProfileDeathOperation {
             return;
         }
 
-        final Player player = this.profile.getPlayer().get();
+        final Player player = this.profile.getPlayer();
         this.profile.addInvulnerabilityClause(EntityDamageEvent.DamageCause.FALL);
         player.teleport(loc);
         player.sendMessage(CC.info("Vous avez été ressuscité !"));
@@ -80,7 +81,12 @@ public final class DakiGyutaroDeathOperation implements IProfileDeathOperation {
         this.task = null;
         this.profile.setState(IProfile.State.SPECTATING);
         this.profile.sendDeathMessage(disconnection, 0);
-        this.profile.getPlayer().ifPresent(player ->
-                player.sendMessage(CC.error("Vous êtes mort définitivement, vous ne pouvez être ressuscité qu'à l'aide de commandes administratives.")));
+
+        if (!profile.isOnline()) {
+            return;
+        }
+
+        profile.sendMessage(CC.error("Vous êtes mort définitivement, vous ne pouvez être ressuscité qu'à l'aide de commandes administratives."));
+
     }
 }
