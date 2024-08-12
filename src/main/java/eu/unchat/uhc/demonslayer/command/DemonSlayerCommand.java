@@ -16,8 +16,11 @@ import eu.unchat.uhc.power.AbstractPower;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.role.AbstractRole;
 import eu.unchat.uhc.util.CC;
-import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import lombok.SneakyThrows;
+import net.minecraft.server.v1_8_R3.ChatComponentUtils;
+import net.minecraft.server.v1_8_R3.EntityPlayer;
+import net.minecraft.server.v1_8_R3.IChatBaseComponent;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 @Command(name = "demonslayer", aliases = {"ds"})
@@ -28,17 +31,32 @@ public final class DemonSlayerCommand {
         player.performCommand("effect");
     }
 
-    @Execute(name = "role")
+    @SneakyThrows
+    @Execute(name = "role", aliases = "me")
     void executeRole(final @Context Player player) {
         final IProfile profile = IProfile.of(player.getUniqueId());
-        if (profile.getRole() == null) {
+        AbstractRole role = profile.getRole();
+        if (role == null) {
             player.sendMessage(CC.error("Vous n'avez pas de rôle"));
             return;
         }
 
         player.sendMessage(CC.center("&3&lDEMON SLAYER UHC"));
-        Audience audience = API.get().getAdventure().player(player);
-        audience.sendMessage(MiniMessage.miniMessage().deserialize(profile.getRole().getDescription(player)));
+        String translation = API.get().getTolgeeClient().getTranslationHandler().getTranslation(role.getTolgeeReference());
+
+        if (translation == null) {
+            translation = API.get().getTolgeeClient().getTranslationHandler().getTranslation("fr.unchat.uhc.role.unknown");
+        }
+
+        IChatBaseComponent component = IChatBaseComponent.ChatSerializer.a(translation.replace("<role_name>", role.getName()));
+        EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
+        entityPlayer.sendMessage(ChatComponentUtils.filterForDisplay(entityPlayer, component, entityPlayer));
+
+        for (Class<? extends AbstractRole> knownRole : role.getKnownRoles()) {
+            IProfile knownProfile = AbstractRole.findPlayer(knownRole);
+            AbstractRole abstractRole = API.get().getRoleHandler().getRole(knownRole);
+            player.sendMessage(CC.translate(" &8- &7" + (knownProfile == null ? "&cIl n'y à pas de " + abstractRole.getName() + " dans la partie." : knownProfile.getName() + " est " + abstractRole.getName())));
+        }
     }
 
     @Execute(name = "flair")
