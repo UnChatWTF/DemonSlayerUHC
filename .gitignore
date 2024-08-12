@@ -6,4 +6,4 @@ build
 
 .idea
 
-/src/main/resources/config.yml
+src/main/resources/config.yml
