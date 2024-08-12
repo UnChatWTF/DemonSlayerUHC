@@ -36,6 +36,8 @@ public final class DSRoleHandler {
         registerRole(ShinobuRole.class);
         registerRole(KyojuroRole.class);
         registerRole(ObanaiRole.class);
+        registerRole(TamayoRole.class);
+        registerRole(YushiroRole.class);
 
         registerRole(MuzanRole.class);
         registerRole(NakimeRole.class);
