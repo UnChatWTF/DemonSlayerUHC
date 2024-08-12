@@ -6,6 +6,7 @@ import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 @Getter
 public final class FireSeaPower extends AbstractItemPower {
@@ -31,6 +32,8 @@ public final class FireSeaPower extends AbstractItemPower {
 
     @Override
     public boolean onClick(Player player) {
+        Vector vector = player.getEyeLocation().getDirection().multiply(2);
+        player.setVelocity(vector);
         return true;
     }
 }
