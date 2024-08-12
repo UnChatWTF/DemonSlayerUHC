@@ -3,6 +3,7 @@ package eu.unchat.uhc.demonslayer;
 import dev.rollczi.litecommands.LiteCommands;
 import dev.rollczi.litecommands.adventure.LiteAdventureExtension;
 import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
+import eu.unchat.tolgee.TolgeeClient;
 import eu.unchat.tolgee.translation.TranslationHandler;
 import eu.unchat.uhc.API;
 import eu.unchat.uhc.demonslayer.command.DemonSlayerCommand;
@@ -36,8 +37,7 @@ public final class DSPlugin extends JavaPlugin {
         this.teamHandler = new DSTeamHandler();
         this.roleHandler = new DSRoleHandler();
 
-        TranslationHandler translationHandler = API.get().getTolgeeClient().getTranslationHandler();
-        translationHandler.loadKeys("8997");
+        API.get().getGameHandler().getConfiguration().setName("&3&lDemon Slayer UHC");
     }
 
     public static DSPlugin get() {
@@ -46,6 +46,13 @@ public final class DSPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
+
+        TolgeeClient tolgeeClient = API.get().getTolgeeClient();
+        tolgeeClient.login(getConfig().getString("tolgee-api", ""));
+        TranslationHandler translationHandler = tolgeeClient.getTranslationHandler();
+        translationHandler.loadKeys("8997");
+
         Bukkit.getScheduler().runTaskLater(this, () -> {
             this.liteCommands = LiteBukkitFactory.builder()
                     .commands(new DemonSlayerCommand())
