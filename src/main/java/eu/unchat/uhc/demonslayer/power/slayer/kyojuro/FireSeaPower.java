@@ -1,6 +1,6 @@
 package eu.unchat.uhc.demonslayer.power.slayer.kyojuro;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -31,9 +31,9 @@ public final class FireSeaPower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         Vector vector = player.getEyeLocation().getDirection().multiply(2);
         player.setVelocity(vector);
-        return true;
+        return Result.SUCCESS;
     }
 }

@@ -1,7 +1,7 @@
 package eu.unchat.uhc.demonslayer.power.slayer.zenitsu;
 
 import eu.unchat.uhc.demonslayer.DSPlugin;
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.util.CC;
 import eu.unchat.uhc.util.ItemBuilder;
@@ -40,7 +40,7 @@ public final class DivineSpeedPower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         IProfile profile = IProfile.of(player.getUniqueId());
         profile.setSpeedBuffer(profile.getSpeedBuffer() + 0.08F);
         Bukkit.getScheduler().runTaskLater(DSPlugin.get(), () -> {
@@ -51,6 +51,6 @@ public final class DivineSpeedPower extends AbstractItemPower {
                 profile.setSpeedBuffer(profile.getSpeedBuffer() + 0.04F);
             }, 15 * 20L);
         }, 15 * 20L);
-        return true;
+        return Result.SUCCESS;
     }
 }

@@ -1,7 +1,7 @@
 package eu.unchat.uhc.demonslayer.power.demon.daki;
 
 import eu.unchat.uhc.demonslayer.DSPlugin;
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.util.CC;
 import eu.unchat.uhc.util.ItemBuilder;
@@ -30,16 +30,16 @@ public final class ObiSashPower extends AbstractItemPower {
     @Override
     public ItemStack getIcon() {
         return new ItemBuilder(Material.FERMENTED_SPIDER_EYE)
-                .name(getFormattedName(name))
+                .name(name)
                 .asItemStack();
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(Player player, final boolean right) {
         Player target = Utils.getTargetingPlayer(player, 15);
         if (target == null) {
             player.sendMessage(CC.error("Vous devez viser un joueur."));
-            return false;
+            return Result.FAILURE;
         }
 
         IProfile profile = IProfile.of(target.getUniqueId());
@@ -48,6 +48,6 @@ public final class ObiSashPower extends AbstractItemPower {
         Bukkit.getScheduler().runTaskLater(DSPlugin.get(), () -> {
             profile.setSlownessBuffer(profile.getSlownessBuffer() - 0.03F);
         }, 30 * 20L);
-        return true;
+        return Result.SUCCESS;
     }
 }

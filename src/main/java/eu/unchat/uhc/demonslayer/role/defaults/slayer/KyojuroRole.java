@@ -3,8 +3,8 @@ package eu.unchat.uhc.demonslayer.role.defaults.slayer;
 import eu.unchat.uhc.demonslayer.power.slayer.kyojuro.FireSeaPower;
 import eu.unchat.uhc.demonslayer.power.slayer.kyojuro.PurgatoryPower;
 import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.AbstractParentPower;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.power.item.AbstractParentPower;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
@@ -16,11 +16,12 @@ import org.bukkit.potion.PotionEffectType;
 
 @Getter
 @Role(name = "Kyojuro", identifier = "kyojuro", team = SlayerTeam.class, material = Material.FLINT)
-public final class KyojuroRole extends AbstractRole {
-    private final String tolgeeReference;
+public final class KyojuroRole extends AbstractDSRole {
+
+    private final Gender gender;
 
     public KyojuroRole() {
-        this.tolgeeReference = "fr.unchat.demonslayer.role.kyojuro";
+        this.gender = Gender.MALE;
 
         registerPower(new IntegralConcentrationBreathPower());
     }

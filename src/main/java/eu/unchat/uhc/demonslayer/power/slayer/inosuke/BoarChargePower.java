@@ -1,6 +1,6 @@
 package eu.unchat.uhc.demonslayer.power.slayer.inosuke;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -37,10 +37,10 @@ public final class BoarChargePower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         Location loc = player.getLocation();
         loc.add(loc.getDirection().multiply(3));
         player.setVelocity(loc.toVector());
-        return true;
+        return Result.SUCCESS;
     }
 }

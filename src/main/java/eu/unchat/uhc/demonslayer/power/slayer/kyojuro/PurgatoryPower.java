@@ -1,7 +1,7 @@
 package eu.unchat.uhc.demonslayer.power.slayer.kyojuro;
 
 import eu.unchat.uhc.demonslayer.DSPlugin;
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.util.ItemBuilder;
 import eu.unchat.uhc.util.Utils;
@@ -35,7 +35,7 @@ public final class PurgatoryPower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         Location center = player.getLocation();
 
         IProfile profile = IProfile.of(player.getUniqueId());
@@ -50,6 +50,6 @@ public final class PurgatoryPower extends AbstractItemPower {
         for (Location location : Utils.createSphere(center, 20, false)) {
             location.getBlock().setType(Material.AIR);
         }
-        return true;
+        return Result.SUCCESS;
     }
 }

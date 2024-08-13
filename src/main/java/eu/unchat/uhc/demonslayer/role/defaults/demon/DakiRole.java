@@ -4,7 +4,7 @@ import eu.unchat.uhc.demonslayer.death.DakiGyutaroDeathOperation;
 import eu.unchat.uhc.demonslayer.power.demon.daki.ObiSashPower;
 import eu.unchat.uhc.demonslayer.team.defaults.DemonTeam;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -13,11 +13,12 @@ import org.bukkit.entity.Player;
 
 @Getter
 @Role(name = "Daki", identifier = "daki", team = DemonTeam.class, material = Material.BARRIER)
-public final class DakiRole extends AbstractRole {
-    private final String tolgeeReference;
+public final class DakiRole extends AbstractDSRole {
+
+    private final Gender gender;
 
     public DakiRole() {
-        this.tolgeeReference = "fr.unchat.demonslayer.role.daki";
+        this.gender = Gender.FEMALE;
 
         registerKnownRole(MuzanRole.class);
         registerKnownRole(GyutaroRole.class);

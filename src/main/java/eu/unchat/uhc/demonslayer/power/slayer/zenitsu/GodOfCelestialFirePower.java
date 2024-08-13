@@ -1,6 +1,6 @@
 package eu.unchat.uhc.demonslayer.power.slayer.zenitsu;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -34,7 +34,7 @@ public final class GodOfCelestialFirePower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
-        return true;
+    public Result onClick(final Player player, final boolean right) {
+        return Result.SUCCESS;
     }
 }

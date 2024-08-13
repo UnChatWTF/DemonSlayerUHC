@@ -1,6 +1,6 @@
 package eu.unchat.uhc.demonslayer.power.slayer.yushiro;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.util.CC;
 import eu.unchat.uhc.util.ItemBuilder;
@@ -34,17 +34,17 @@ public final class ResistanceTalismanPower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         Player target = Utils.getTargetingPlayer(player, 30);
         if (target == null) {
             player.sendMessage(CC.error("Vous devez viser un joueur."));
-            return false;
+            return Result.FAILURE;
         }
 
         IProfile profile = IProfile.of(target.getUniqueId());
         profile.setResistanceBuffer(profile.getResistanceBuffer() + 10);
         player.sendMessage(CC.success("Vous avez donné un talisman de résistance à &3" + target.getName() + "&b."));
         target.sendMessage(CC.success("Vous avez reçu un talisman de résistance de &cYushiro&b."));
-        return true;
+        return Result.SUCCESS;
     }
 }

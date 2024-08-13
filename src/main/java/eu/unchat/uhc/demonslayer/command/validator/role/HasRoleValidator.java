@@ -6,7 +6,7 @@ import dev.rollczi.litecommands.invocation.Invocation;
 import dev.rollczi.litecommands.requirement.Requirement;
 import dev.rollczi.litecommands.validator.ValidatorResult;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -27,7 +27,7 @@ public final class HasRoleValidator implements AnnotatedValidator<CommandSender,
             return ValidatorResult.invalid("Vous n'avez pas de rôle.");
         }
 
-        if (Arrays.stream(hasRole.value()).noneMatch(clazz -> AbstractRole.isRole(profile, clazz))) {
+        if (Arrays.stream(hasRole.value()).noneMatch(clazz -> AbstractDSRole.isRole(profile, clazz))) {
             return ValidatorResult.invalid("Vous ou le joueur ciblé n'avez pas le rôle requis.");
         }
 

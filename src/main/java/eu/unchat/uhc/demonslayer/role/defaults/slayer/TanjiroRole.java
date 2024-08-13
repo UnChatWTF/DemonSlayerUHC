@@ -4,8 +4,8 @@ import eu.unchat.uhc.demonslayer.power.slayer.tanjiro.BlueParadisePower;
 import eu.unchat.uhc.demonslayer.power.slayer.tanjiro.SmellPower;
 import eu.unchat.uhc.demonslayer.power.slayer.tanjiro.SwirlPower;
 import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.AbstractParentPower;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.power.item.AbstractParentPower;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -13,19 +13,15 @@ import org.bukkit.entity.Player;
 
 @Getter
 @Role(name = "Tanjiro", identifier = "tanjiro", team = SlayerTeam.class, material = Material.BLAZE_ROD)
-public final class TanjiroRole extends AbstractRole {
-    private final String tolgeeReference;
+public final class TanjiroRole extends AbstractDSRole {
+
+    private final Gender gender;
 
     public TanjiroRole() {
-        this.tolgeeReference = "fr.unchat.demonslayer.role.tanjiro";
+        this.gender = Gender.MALE;
 
         registerPower(new SmellPower());
         registerPower(new IntegralConcentrationBreathPower());
-    }
-
-    @Override
-    public String getDescription(Player player) {
-        return "<gray>Vous êtes <b><green>Tanjiro</green></b>.<newline>Vous devez gagner avec les <b><green>Slayers</green></b>.</gray><newline><newline>";
     }
 
     @Getter

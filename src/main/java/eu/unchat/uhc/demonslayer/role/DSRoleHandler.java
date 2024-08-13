@@ -4,7 +4,7 @@ import eu.unchat.uhc.API;
 import eu.unchat.uhc.demonslayer.role.defaults.demon.*;
 import eu.unchat.uhc.demonslayer.role.defaults.slayer.*;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.team.AbstractTeam;
 
 import java.util.Arrays;
@@ -38,6 +38,7 @@ public final class DSRoleHandler {
         registerRole(ObanaiRole.class);
         registerRole(TamayoRole.class);
         registerRole(YushiroRole.class);
+        registerRole(TengenRole.class);
 
         registerRole(MuzanRole.class);
         registerRole(NakimeRole.class);
@@ -46,7 +47,7 @@ public final class DSRoleHandler {
         registerRole(GyutaroRole.class);
     }
 
-    private void registerRole(final Class<? extends AbstractRole> clazz) {
+    private void registerRole(final Class<? extends AbstractDSRole> clazz) {
         API.get().getRoleHandler().registerRole(clazz);
     }
 }

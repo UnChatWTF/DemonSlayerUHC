@@ -2,7 +2,7 @@ package eu.unchat.uhc.demonslayer.role.defaults.slayer;
 
 import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -11,11 +11,12 @@ import org.bukkit.entity.Player;
 
 @Getter
 @Role(name = "Inosuke", identifier = "inosuke", team = SlayerTeam.class, material = Material.PORK)
-public final class InosukeRole extends AbstractRole {
-    private final String tolgeeReference;
+public final class InosukeRole extends AbstractDSRole {
+
+    private final Gender gender;
 
     public InosukeRole() {
-        this.tolgeeReference = "fr.unchat.demonslayer.role.inosuke";
+        this.gender = Gender.MALE;
     }
 
     @Override

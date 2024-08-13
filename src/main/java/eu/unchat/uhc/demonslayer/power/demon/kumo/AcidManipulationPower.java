@@ -1,6 +1,6 @@
 package eu.unchat.uhc.demonslayer.power.demon.kumo;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.util.CC;
 import eu.unchat.uhc.util.ItemBuilder;
 import eu.unchat.uhc.util.Utils;
@@ -39,11 +39,11 @@ public final class AcidManipulationPower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         Player target = Utils.getTargetingPlayer(player, 15);
         if (target == null) {
             player.sendMessage(CC.error("Vous devez viser un joueur."));
-            return false;
+            return Result.FAILURE;
         }
 
         target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * 5, 1, false, false), true);
@@ -53,6 +53,6 @@ public final class AcidManipulationPower extends AbstractItemPower {
             }
             stack.setDurability((short) (stack.getDurability() + 40));
         }
-        return true;
+        return Result.SUCCESS;
     }
 }

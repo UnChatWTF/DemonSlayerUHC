@@ -1,6 +1,6 @@
 package eu.unchat.uhc.demonslayer.power.demon.gyutaro;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.util.CC;
 import eu.unchat.uhc.util.ItemBuilder;
 import eu.unchat.uhc.util.Utils;
@@ -29,21 +29,21 @@ public final class BloodManipulationPower extends AbstractItemPower {
     @Override
     public ItemStack getIcon() {
         return new ItemBuilder(Material.DIAMOND_HOE)
-                .name(getFormattedName(name))
+                .name(name)
                 .asItemStack();
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(Player player, final boolean right) {
         Player target = Utils.getTargetingPlayer(player, 15);
         if (target == null) {
             player.sendMessage(CC.error("Vous devez viser un joueur."));
-            return false;
+            return Result.FAILURE;
         }
 
         target.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 8 * 20, 1, false, false), true);
         player.sendMessage(CC.info("Vous manipulez le &csang &bde &3" + target.getName() + "&b."));
         target.sendMessage(CC.info("&cGyutaro &bmanipule votre &csang&b."));
-        return true;
+        return Result.SUCCESS;
     }
 }

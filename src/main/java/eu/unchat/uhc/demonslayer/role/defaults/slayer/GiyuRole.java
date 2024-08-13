@@ -1,9 +1,10 @@
 package eu.unchat.uhc.demonslayer.role.defaults.slayer;
 
+import eu.unchat.uhc.API;
 import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
@@ -14,11 +15,12 @@ import org.bukkit.inventory.ItemStack;
 
 @Getter
 @Role(name = "Giyu", identifier = "giyu", team = SlayerTeam.class, material = Material.WATER_BUCKET)
-public final class GiyuRole extends AbstractRole {
-    private final String tolgeeReference;
+public final class GiyuRole extends AbstractDSRole {
+
+    private final Gender gender;
 
     public GiyuRole() {
-        this.tolgeeReference = "fr.unchat.demonslayer.role.giyu";
+        this.gender = Gender.MALE;
 
         registerPower(new DeadCalmPower());
         registerPower(new RisingTidePower());
@@ -57,8 +59,8 @@ public final class GiyuRole extends AbstractRole {
         }
 
         @Override
-        public boolean onClick(Player player) {
-            return true;
+        public Result onClick(final Player player, final boolean right) {
+            return Result.SUCCESS;
         }
     }
 
@@ -85,8 +87,8 @@ public final class GiyuRole extends AbstractRole {
         }
 
         @Override
-        public boolean onClick(Player player) {
-            return true;
+        public Result onClick(final Player player, final boolean right) {
+            return Result.SUCCESS;
         }
     }
 }

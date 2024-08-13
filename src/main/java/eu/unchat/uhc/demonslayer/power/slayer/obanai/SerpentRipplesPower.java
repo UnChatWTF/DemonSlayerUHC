@@ -1,7 +1,7 @@
 package eu.unchat.uhc.demonslayer.power.slayer.obanai;
 
 import eu.unchat.uhc.demonslayer.team.defaults.DemonTeam;
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.util.ItemBuilder;
 import eu.unchat.uhc.util.Utils;
@@ -28,20 +28,24 @@ public class SerpentRipplesPower extends AbstractItemPower {
     @Override
     public ItemStack getIcon() {
         return new ItemBuilder(Material.INK_SACK)
-                .name(getFormattedName(name))
+                .name(name)
                 .data(2)
                 .asItemStack();
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         for (Player near : Utils.getNearbyPlayers(player, 20)) {
             if (player.getUniqueId().equals(near.getUniqueId())) {
                 continue;
             }
 
             IProfile profile = IProfile.of(near.getUniqueId());
-            if (profile.getTeam() == null || !(profile.getTeam().getClass().equals(DemonTeam.class))) {
+            if (profile.getTeam() == null) {
+                continue;
+            }
+
+            if (profile.getTeam().getClass().equals(DemonTeam.class)) {
                 profile.removeHealth(2);
                 near.setMaxHealth(2);
                 continue;
@@ -49,6 +53,6 @@ public class SerpentRipplesPower extends AbstractItemPower {
 
             near.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 8 * 20, 1, false, false), true);
         }
-        return true;
+        return Result.SUCCESS;
     }
 }

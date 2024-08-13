@@ -3,9 +3,9 @@ package eu.unchat.uhc.demonslayer.power.slayer.tanjiro;
 import com.google.common.collect.Lists;
 import eu.unchat.uhc.demonslayer.DSPlugin;
 import eu.unchat.uhc.demonslayer.role.defaults.slayer.TanjiroRole;
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.util.CC;
 import eu.unchat.uhc.util.ItemBuilder;
 import eu.unchat.uhc.util.Utils;
@@ -54,11 +54,11 @@ public final class SwirlPower extends AbstractItemPower implements Listener {
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         final Player target = Utils.getTargetingPlayer(player, 20);
         if (target == null) {
             player.sendMessage(CC.error("Vous devez viser un joueur."));
-            return false;
+            return Result.FAILURE;
         }
 
         final Location location = target.getLocation();
@@ -79,13 +79,13 @@ public final class SwirlPower extends AbstractItemPower implements Listener {
             this.locations.forEach(location1 -> setBlock(location1.getBlock(), Material.AIR));
             this.locations.clear();
         }, 30 * 20L);
-        return true;
+        return Result.SUCCESS;
     }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         final Player player = event.getPlayer();
-        if (this.locations.isEmpty() || AbstractRole.isRole(IProfile.of(player.getUniqueId()), TanjiroRole.class)) {
+        if (this.locations.isEmpty() || AbstractDSRole.isRole(IProfile.of(player.getUniqueId()), TanjiroRole.class)) {
             return;
         }
 

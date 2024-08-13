@@ -1,6 +1,6 @@
 package eu.unchat.uhc.demonslayer.power.slayer.shinobu;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.util.CC;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
@@ -35,7 +35,7 @@ public final class HexagonalFacetEyePower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
-        return true;
+    public Result onClick(final Player player, final boolean right) {
+        return Result.SUCCESS;
     }
 }

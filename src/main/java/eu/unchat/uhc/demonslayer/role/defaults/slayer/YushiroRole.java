@@ -2,9 +2,9 @@ package eu.unchat.uhc.demonslayer.role.defaults.slayer;
 
 import eu.unchat.uhc.demonslayer.power.slayer.yushiro.*;
 import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.AbstractParentPower;
+import eu.unchat.uhc.power.item.AbstractParentPower;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -12,12 +12,13 @@ import org.bukkit.entity.Player;
 
 @Getter
 @Role(name = "Yushiro", identifier = "yushiro", team = SlayerTeam.class, material = Material.SAPLING)
-public final class YushiroRole extends AbstractRole {
+public final class YushiroRole extends AbstractDSRole {
 
-    private final String tolgeeReference;
+    private final Gender gender;
 
     public YushiroRole() {
-        this.tolgeeReference = "fr.unchat.demonslayer.role.yushiro";
+        this.gender = Gender.MALE;
+
         registerKnownRole(TamayoRole.class);
         registerPower(new TalismanPower());
     }
@@ -41,6 +42,7 @@ public final class YushiroRole extends AbstractRole {
 
         public TalismanPower() {
             this.name = "&c&lSANGUINARY POWER";
+
             registerChild(new RevealTalismanPower());
             registerChild(new ControlTalismanPower());
             registerChild(new StrengthTalismanPower());

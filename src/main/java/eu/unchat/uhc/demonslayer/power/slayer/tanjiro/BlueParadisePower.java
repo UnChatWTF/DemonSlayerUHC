@@ -1,6 +1,6 @@
 package eu.unchat.uhc.demonslayer.power.slayer.tanjiro;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
 import eu.unchat.uhc.util.ItemBuilder;
 import eu.unchat.uhc.util.Utils;
 import lombok.Getter;
@@ -42,13 +42,14 @@ public final class BlueParadisePower extends AbstractItemPower implements Listen
     }
 
     @Override
-    public boolean onClick(Player player) {
+    public Result onClick(final Player player, final boolean right) {
         this.centerLocation = player.getLocation();
 
         for (Block block : Utils.createCompleteHighestCircle(this.centerLocation, 20)) {
             block.setType(Material.NETHERRACK);
         }
-        return true;
+
+        return Result.SUCCESS;
     }
 
     @EventHandler

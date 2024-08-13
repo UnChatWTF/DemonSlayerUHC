@@ -1,6 +1,7 @@
 package eu.unchat.uhc.demonslayer.power.slayer.yushiro;
 
-import eu.unchat.uhc.power.AbstractItemPower;
+import eu.unchat.uhc.power.item.AbstractItemPower;
+import eu.unchat.uhc.util.CC;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -31,7 +32,8 @@ public final class RevealTalismanPower extends AbstractItemPower {
     }
 
     @Override
-    public boolean onClick(Player player) {
-        return true;
+    public Result onClick(final Player player, final boolean right) {
+        player.sendMessage(CC.info("Test"));
+        return Result.SUCCESS;
     }
 }

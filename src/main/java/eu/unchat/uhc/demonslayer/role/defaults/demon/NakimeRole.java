@@ -1,8 +1,8 @@
 package eu.unchat.uhc.demonslayer.role.defaults.demon;
 
 import eu.unchat.uhc.demonslayer.team.defaults.DemonTeam;
-import eu.unchat.uhc.power.AbstractItemPower;
-import eu.unchat.uhc.role.AbstractRole;
+import eu.unchat.uhc.power.item.AbstractItemPower;
+import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -11,11 +11,12 @@ import org.bukkit.inventory.ItemStack;
 
 @Getter
 @Role(name = "Nakime", identifier = "nakime", team = DemonTeam.class, material = Material.MAGMA_CREAM)
-public final class NakimeRole extends AbstractRole {
-    private final String tolgeeReference;
+public final class NakimeRole extends AbstractDSRole {
+
+    private final Gender gender;
 
     public NakimeRole() {
-        this.tolgeeReference = "fr.unchat.demonslayer.role.nakime";
+        this.gender = Gender.FEMALE;
 
         registerKnownRole(MuzanRole.class);
     }
@@ -43,8 +44,8 @@ public final class NakimeRole extends AbstractRole {
         }
 
         @Override
-        public boolean onClick(Player player) {
-            return true;
+        public Result onClick(final Player player, final boolean right) {
+            return Result.SUCCESS;
         }
     }
 }
