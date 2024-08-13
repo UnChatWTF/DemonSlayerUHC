@@ -46,13 +46,6 @@ public final class DSPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-
-        TolgeeClient tolgeeClient = API.get().getTolgeeClient();
-        tolgeeClient.login(getConfig().getString("tolgee-api", ""));
-        TranslationHandler translationHandler = tolgeeClient.getTranslationHandler();
-        translationHandler.loadKeys("8997");
-
         Bukkit.getScheduler().runTaskLater(this, () -> {
             this.liteCommands = LiteBukkitFactory.builder()
                     .commands(new DemonSlayerCommand())
