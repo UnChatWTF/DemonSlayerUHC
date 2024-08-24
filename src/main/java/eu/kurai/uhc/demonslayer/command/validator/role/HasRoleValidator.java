@@ -1,12 +1,12 @@
-package eu.unchat.uhc.demonslayer.command.validator.role;
+package eu.kurai.uhc.demonslayer.command.validator.role;
 
 import dev.rollczi.litecommands.annotations.validator.requirment.AnnotatedValidator;
 import dev.rollczi.litecommands.command.executor.CommandExecutor;
 import dev.rollczi.litecommands.invocation.Invocation;
 import dev.rollczi.litecommands.requirement.Requirement;
 import dev.rollczi.litecommands.validator.ValidatorResult;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

@@ -1,6 +1,6 @@
-package eu.unchat.uhc.demonslayer;
+package eu.kurai.uhc.demonslayer;
 
-import eu.unchat.uhc.demonslayer.speciality.blade.DSBladeHandler;
+import eu.kurai.uhc.demonslayer.speciality.blade.DSBladeHandler;
 import eu.unchat.uhc.module.AbstractModule;
 import eu.unchat.uhc.module.Module;
 import org.bukkit.ChatColor;
@@ -8,9 +8,9 @@ import org.bukkit.ChatColor;
 @Module(
         name = "Demon Slayer",
         version = "0.0.1",
-        authors = {"UnChat"},
-        gameDesigners = "UnChat",
-        developers = "UnChat",
+        authors = {"Kurai"},
+        gameDesigners = "Kurai",
+        developers = "Kurai",
         primaryColor = ChatColor.DARK_AQUA,
         secondaryColor = ChatColor.AQUA,
         glassColor = 9

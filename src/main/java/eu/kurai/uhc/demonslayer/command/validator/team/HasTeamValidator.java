@@ -1,4 +1,4 @@
-package eu.unchat.uhc.demonslayer.command.validator.team;
+package eu.kurai.uhc.demonslayer.command.validator.team;
 
 import dev.rollczi.litecommands.annotations.validator.requirment.AnnotatedValidator;
 import dev.rollczi.litecommands.command.executor.CommandExecutor;
