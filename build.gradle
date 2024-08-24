@@ -34,5 +34,6 @@ compileJava {
 }
 
 shadowJar {
-    destinationDirectory.set(file("C:\\Users\\livre\\Desktop\\Test\\plugins"))
+//    destinationDirectory.set(file("C:\\Users\\livre\\Desktop\\Test\\plugins"))
+    destinationDirectory.set(file("C:\\Users\\livre\\Desktop\\TitaServer\\plugins"))
 }
