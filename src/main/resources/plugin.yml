@@ -1,6 +1,6 @@
 name: DemonSlayer-UHC
 version: 1.0.0
-author: UnChat
-main: eu.unchat.uhc.demonslayer.DSPlugin
+author: Kurai
+main: eu.kurai.uhc.demonslayer.DSPlugin
 depend:
   - UHC-Core
