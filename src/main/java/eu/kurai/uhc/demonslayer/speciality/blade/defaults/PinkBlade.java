@@ -1,6 +1,6 @@
-package eu.unchat.uhc.demonslayer.speciality.blade.defaults;
+package eu.kurai.uhc.demonslayer.speciality.blade.defaults;
 
-import eu.unchat.uhc.demonslayer.speciality.blade.IBlade;
+import eu.kurai.uhc.demonslayer.speciality.blade.IBlade;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.util.ItemBuilder;
 import org.bukkit.Material;

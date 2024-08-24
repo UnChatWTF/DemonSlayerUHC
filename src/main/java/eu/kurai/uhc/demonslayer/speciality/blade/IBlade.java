@@ -1,4 +1,4 @@
-package eu.unchat.uhc.demonslayer.speciality.blade;
+package eu.kurai.uhc.demonslayer.speciality.blade;
 
 import eu.unchat.uhc.profile.IProfile;
 import org.bukkit.inventory.ItemStack;
