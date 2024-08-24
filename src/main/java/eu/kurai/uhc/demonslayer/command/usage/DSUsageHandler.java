@@ -1,4 +1,4 @@
-package eu.unchat.uhc.demonslayer.command.usage;
+package eu.kurai.uhc.demonslayer.command.usage;
 
 import dev.rollczi.litecommands.handler.result.ResultHandlerChain;
 import dev.rollczi.litecommands.invalidusage.InvalidUsage;

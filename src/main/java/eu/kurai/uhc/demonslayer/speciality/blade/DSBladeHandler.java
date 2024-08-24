@@ -1,8 +1,8 @@
-package eu.unchat.uhc.demonslayer.speciality.blade;
+package eu.kurai.uhc.demonslayer.speciality.blade;
 
 import com.google.common.collect.Lists;
-import eu.unchat.uhc.demonslayer.DSPlugin;
-import eu.unchat.uhc.demonslayer.speciality.blade.defaults.*;
+import eu.kurai.uhc.demonslayer.DSPlugin;
+import eu.kurai.uhc.demonslayer.speciality.blade.defaults.*;
 import eu.unchat.uhc.profile.IProfile;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.SneakyThrows;
@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -68,7 +69,14 @@ public final class DSBladeHandler implements Listener {
             return;
         }
 
-        IBlade blade = DSBladeHandler.get().blades.get(ThreadLocalRandom.current().nextInt(DSBladeHandler.get().blades.size()));
+        List<IBlade> bladeList = Lists.newArrayList();
+        bladeList.addAll(blades);
+        IBlade blade = bladeList.get(ThreadLocalRandom.current().nextInt(bladeList.size()));
+
+        if (player.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE)) {
+            bladeList.removeIf(OrangeBlade.class::isInstance);
+        }
+
         blade.apply().accept(IProfile.of(player.getUniqueId()));
         player.getInventory().remove(ITEM);
         player.getInventory().addItem(blade.getDisplay());

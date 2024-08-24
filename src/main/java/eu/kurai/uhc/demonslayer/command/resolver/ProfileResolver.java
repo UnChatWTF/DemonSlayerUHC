@@ -1,4 +1,4 @@
-package eu.unchat.uhc.demonslayer.command.resolver;
+package eu.kurai.uhc.demonslayer.command.resolver;
 
 import dev.rollczi.litecommands.argument.Argument;
 import dev.rollczi.litecommands.argument.parser.ParseResult;

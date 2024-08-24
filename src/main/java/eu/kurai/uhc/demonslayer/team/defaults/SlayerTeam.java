@@ -1,4 +1,4 @@
-package eu.unchat.uhc.demonslayer.team.defaults;
+package eu.kurai.uhc.demonslayer.team.defaults;
 
 import eu.unchat.uhc.team.AbstractTeam;
 import eu.unchat.uhc.team.Team;

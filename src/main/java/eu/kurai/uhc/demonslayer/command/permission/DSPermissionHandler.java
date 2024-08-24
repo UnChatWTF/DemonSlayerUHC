@@ -1,4 +1,4 @@
-package eu.unchat.uhc.demonslayer.command.permission;
+package eu.kurai.uhc.demonslayer.command.permission;
 
 import dev.rollczi.litecommands.handler.result.ResultHandlerChain;
 import dev.rollczi.litecommands.invocation.Invocation;

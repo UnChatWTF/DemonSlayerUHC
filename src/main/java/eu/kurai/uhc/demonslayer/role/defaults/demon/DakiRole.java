@@ -1,10 +1,10 @@
-package eu.unchat.uhc.demonslayer.role.defaults.demon;
+package eu.kurai.uhc.demonslayer.role.defaults.demon;
 
-import eu.unchat.uhc.demonslayer.death.DakiGyutaroDeathOperation;
-import eu.unchat.uhc.demonslayer.power.demon.daki.ObiSashPower;
-import eu.unchat.uhc.demonslayer.team.defaults.DemonTeam;
+import eu.kurai.uhc.demonslayer.death.DakiGyutaroDeathOperation;
+import eu.kurai.uhc.demonslayer.power.demon.daki.ObiSashPower;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.DemonTeam;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -16,9 +16,11 @@ import org.bukkit.entity.Player;
 public final class DakiRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public DakiRole() {
         this.gender = Gender.FEMALE;
+        this.rank = Rank.A;
 
         registerKnownRole(MuzanRole.class);
         registerKnownRole(GyutaroRole.class);
