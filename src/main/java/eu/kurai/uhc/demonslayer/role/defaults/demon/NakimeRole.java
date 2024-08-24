@@ -1,8 +1,8 @@
-package eu.unchat.uhc.demonslayer.role.defaults.demon;
+package eu.kurai.uhc.demonslayer.role.defaults.demon;
 
-import eu.unchat.uhc.demonslayer.team.defaults.DemonTeam;
-import eu.unchat.uhc.power.item.AbstractItemPower;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.DemonTeam;
+import eu.unchat.uhc.power.defaults.AbstractItemPower;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -14,28 +14,28 @@ import org.bukkit.inventory.ItemStack;
 public final class NakimeRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public NakimeRole() {
         this.gender = Gender.FEMALE;
+        this.rank = Rank.B;
 
         registerKnownRole(MuzanRole.class);
     }
 
     @Getter
     private static final class BiwaPower extends AbstractItemPower {
-        private final String name;
+        private final String name, identifier;
 
-        private final int initialCooldown, initialUses;
 
-        private final ClickType clickType;
+        private final InteractionType interactionType = InteractionType.RIGHT_CLICK;
 
         public BiwaPower() {
             this.name = "&c&lBiwa";
+            this.identifier = "biwa";
 
-            this.initialCooldown = 20 * 60;
-            this.initialUses = -1;
-
-            this.clickType = ClickType.RIGHT_CLICK;
+            this.setInitialCooldown(20 * 60);
+            this.setInitialUses(-1);
         }
 
         @Override
@@ -44,8 +44,8 @@ public final class NakimeRole extends AbstractDSRole {
         }
 
         @Override
-        public Result onClick(final Player player, final boolean right) {
-            return Result.SUCCESS;
+        public Result onInteract(final Player player, final InteractionType interactionType) {
+            return Result.SUCCESSFUL;
         }
     }
 }

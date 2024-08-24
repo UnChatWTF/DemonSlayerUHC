@@ -1,10 +1,10 @@
-package eu.unchat.uhc.demonslayer.role.defaults.slayer;
+package eu.kurai.uhc.demonslayer.role.defaults.slayer;
 
-import eu.unchat.uhc.demonslayer.power.slayer.kyojuro.FireSeaPower;
-import eu.unchat.uhc.demonslayer.power.slayer.kyojuro.PurgatoryPower;
-import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.item.AbstractParentPower;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.power.slayer.BreathPower;
+import eu.kurai.uhc.demonslayer.power.slayer.kyojuro.FireSeaPower;
+import eu.kurai.uhc.demonslayer.power.slayer.kyojuro.PurgatoryPower;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.SlayerTeam;
 import eu.unchat.uhc.role.Role;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
@@ -19,11 +19,13 @@ import org.bukkit.potion.PotionEffectType;
 public final class KyojuroRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public KyojuroRole() {
         this.gender = Gender.MALE;
+        this.rank = Rank.A;
 
-        registerPower(new IntegralConcentrationBreathPower());
+        registerPower(new BreathPower(this, new FireSeaPower(), new PurgatoryPower()));
     }
 
     @Override
@@ -31,16 +33,5 @@ public final class KyojuroRole extends AbstractDSRole {
         player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 0, false, false), true);
         player.getInventory().addItem(new ItemBuilder(Material.ENCHANTED_BOOK).enchant(Enchantment.FIRE_ASPECT, 1).asItemStack());
         player.getInventory().addItem(new ItemBuilder(Material.ENCHANTED_BOOK).enchant(Enchantment.ARROW_FIRE, 1).asItemStack());
-    }
-
-    @Getter
-    private static final class IntegralConcentrationBreathPower extends AbstractParentPower {
-        private final String name;
-
-        public IntegralConcentrationBreathPower() {
-            this.name = "&a&lSOUFFLE";
-            registerChild(new FireSeaPower());
-            registerChild(new PurgatoryPower());
-        }
     }
 }

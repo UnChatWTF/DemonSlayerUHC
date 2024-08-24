@@ -1,7 +1,7 @@
-package eu.unchat.uhc.demonslayer.role.defaults.slayer;
+package eu.kurai.uhc.demonslayer.role.defaults.slayer;
 
-import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.SlayerTeam;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -11,8 +11,10 @@ import org.bukkit.Material;
 public final class MitsuriRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public MitsuriRole() {
         this.gender = Gender.FEMALE;
+        this.rank = Rank.A;
     }
 }

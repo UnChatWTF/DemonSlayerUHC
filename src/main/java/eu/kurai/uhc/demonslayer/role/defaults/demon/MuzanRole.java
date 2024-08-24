@@ -1,13 +1,13 @@
-package eu.unchat.uhc.demonslayer.role.defaults.demon;
+package eu.kurai.uhc.demonslayer.role.defaults.demon;
 
 import com.google.common.collect.Lists;
+import eu.kurai.uhc.demonslayer.DSPlugin;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.role.defaults.slayer.NezukoRole;
+import eu.kurai.uhc.demonslayer.team.defaults.DemonTeam;
 import eu.unchat.uhc.API;
-import eu.unchat.uhc.demonslayer.DSPlugin;
-import eu.unchat.uhc.demonslayer.role.defaults.slayer.NezukoRole;
-import eu.unchat.uhc.demonslayer.team.defaults.DemonTeam;
-import eu.unchat.uhc.power.AbstractPower;
+import eu.unchat.uhc.power.defaults.AbstractCommandPower;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import net.kyori.adventure.audience.Audience;
@@ -24,9 +24,11 @@ import java.util.List;
 public final class MuzanRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public MuzanRole() {
         this.gender = Gender.MALE;
+        this.rank = Rank.S;
 
         registerPower(new BloodGiftPower());
     }
@@ -35,7 +37,7 @@ public final class MuzanRole extends AbstractDSRole {
     public void onDescriptionSent(Player player) {
         List<IProfile> list = Lists.newArrayList();
         list.addAll(DSPlugin.get().getRoleHandler().getTeamList(DemonTeam.class));
-        list.add(AbstractDSRole.findPlayer(NezukoRole.class));
+        list.add(findPlayer(NezukoRole.class));
         Collections.shuffle(list);
 
         Bukkit.getScheduler().runTaskLater(DSPlugin.get(), () -> {
@@ -69,16 +71,21 @@ public final class MuzanRole extends AbstractDSRole {
     }
 
     @Getter
-    public static final class BloodGiftPower extends AbstractPower {
-        private final String name;
-
-        private final int initialCooldown, initialUses;
+    public static final class BloodGiftPower extends AbstractCommandPower {
+        private final String name, identifier, commandName;
 
         public BloodGiftPower() {
             this.name = "&c&lDon de sang";
+            this.identifier = "blood_gift";
+            this.commandName = "ds blood";
 
-            this.initialCooldown = 0;
-            this.initialUses = 2;
+            this.setInitialCooldown(0);
+            this.setInitialUses(2);
+        }
+
+        @Override
+        public Result onCommand(final Player player, final String[] args) {
+            return Result.SUCCESSFUL;
         }
     }
 }

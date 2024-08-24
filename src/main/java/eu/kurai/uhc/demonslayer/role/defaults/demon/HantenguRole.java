@@ -1,41 +1,70 @@
-package eu.unchat.uhc.demonslayer.role.defaults.slayer;
+package eu.kurai.uhc.demonslayer.role.defaults.demon;
 
-import eu.unchat.uhc.demonslayer.power.slayer.obanai.SerpentRipplesPower;
-import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
+import com.google.common.collect.Maps;
+import eu.kurai.uhc.demonslayer.power.demon.hantengu.ClonePower;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.DemonTeam;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
+import eu.unchat.uhc.util.TimeUtil;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Map;
+
 @Getter
-@Role(name = "Obanai", identifier = "obanai", team = SlayerTeam.class, material = Material.INK_SACK, data = 2)
-public final class ObanaiRole extends AbstractDSRole implements Listener {
+@Role(name = "Hantengu", identifier = "hantengu", team = DemonTeam.class, material = Material.BLAZE_ROD)
+public final class HantenguRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
-    public ObanaiRole() {
+    private final Map<Clone, Integer> clones;
+
+    @Setter
+    private Clone clone;
+
+    public HantenguRole() {
         this.gender = Gender.MALE;
+        this.rank = Rank.B;
 
-        registerPower(new SerpentRipplesPower());
+        this.clone = Clone.NONE;
+        this.clones = Maps.newHashMap();
+        for (Clone value : Clone.values()) {
+            if (value.equals(Clone.NONE)) {
+                continue;
+            }
+            this.clones.put(value, 20 * 60);
+        }
+
+        registerKnownRole(MuzanRole.class);
+        registerPower(new ClonePower());
     }
 
     @Override
     public void onDistribute(Player player) {
         IProfile profile = IProfile.of(player.getUniqueId());
-        profile.setSpeedBuffer(profile.getSpeedBuffer() + 0.04F);
+        profile.setWeaknessBuffer(profile.getWeaknessBuffer() + 15);
     }
 
     @Override
     public void onSecond(Player player) {
         IProfile profile = IProfile.of(player.getUniqueId());
+
+        if (!clone.equals(Clone.NONE)) {
+            if (clones.get(clone) > 0) {
+                clones.put(clone, clones.get(clone) - 1);
+                profile.getActionBar().addActionBar("clone_" + clone.name().toLowerCase(), "&c&l" + clone.name() + " : " + TimeUtil.niceTime(clones.get(clone) * 1000L));
+            } else {
+                clone = Clone.NONE;
+                profile.getActionBar().removeActionBar("clone_" + clone.name().toLowerCase());
+            }
+        }
 
         if (hasArmor(player)) {
             if (!player.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
@@ -62,5 +91,14 @@ public final class ObanaiRole extends AbstractDSRole implements Listener {
                 || player.getInventory().getChestplate() != null
                 || player.getInventory().getLeggings() != null
                 || player.getInventory().getBoots() != null;
+    }
+
+    public enum Clone {
+        NONE,
+        SEKIDO,
+        KARAKU,
+        AIZETSU,
+        UROGI,
+        ZOHAKUTEN;
     }
 }

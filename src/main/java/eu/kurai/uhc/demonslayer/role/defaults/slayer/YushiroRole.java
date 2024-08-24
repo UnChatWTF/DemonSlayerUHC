@@ -1,10 +1,10 @@
-package eu.unchat.uhc.demonslayer.role.defaults.slayer;
+package eu.kurai.uhc.demonslayer.role.defaults.slayer;
 
-import eu.unchat.uhc.demonslayer.power.slayer.yushiro.*;
-import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.item.AbstractParentPower;
+import eu.kurai.uhc.demonslayer.power.slayer.yushiro.*;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.SlayerTeam;
+import eu.unchat.uhc.power.defaults.AbstractParentPower;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -15,9 +15,11 @@ import org.bukkit.entity.Player;
 public final class YushiroRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public YushiroRole() {
         this.gender = Gender.MALE;
+        this.rank = Rank.B;
 
         registerKnownRole(TamayoRole.class);
         registerPower(new TalismanPower());
@@ -38,10 +40,11 @@ public final class YushiroRole extends AbstractDSRole {
     @Getter
     private static final class TalismanPower extends AbstractParentPower {
 
-        private final String name;
+        private final String name, identifier;
 
         public TalismanPower() {
             this.name = "&c&lSANGUINARY POWER";
+            this.identifier = "sanguinary_power_yushiro";
 
             registerChild(new RevealTalismanPower());
             registerChild(new ControlTalismanPower());

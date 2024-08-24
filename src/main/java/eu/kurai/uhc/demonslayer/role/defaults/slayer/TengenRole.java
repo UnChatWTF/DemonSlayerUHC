@@ -1,9 +1,9 @@
-package eu.unchat.uhc.demonslayer.role.defaults.slayer;
+package eu.kurai.uhc.demonslayer.role.defaults.slayer;
 
-import eu.unchat.uhc.demonslayer.power.slayer.tengen.ScorePower;
-import eu.unchat.uhc.demonslayer.power.slayer.tengen.ThunderPower;
-import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.power.slayer.tengen.ScorePower;
+import eu.kurai.uhc.demonslayer.power.slayer.tengen.ThunderPower;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.SlayerTeam;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -13,9 +13,11 @@ import org.bukkit.Material;
 public final class TengenRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public TengenRole() {
         this.gender = Gender.MALE;
+        this.rank = Rank.B;
 
         registerPower(new ThunderPower());
         registerPower(new ScorePower());

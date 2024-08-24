@@ -1,11 +1,12 @@
-package eu.unchat.uhc.demonslayer.role.defaults.slayer;
+package eu.kurai.uhc.demonslayer.role.defaults.slayer;
 
-import eu.unchat.uhc.demonslayer.power.slayer.zenitsu.DivineSpeedPower;
-import eu.unchat.uhc.demonslayer.power.slayer.zenitsu.GodOfCelestialFirePower;
-import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.item.AbstractParentPower;
+import eu.kurai.uhc.demonslayer.power.other.DivineSpeedPower;
+import eu.kurai.uhc.demonslayer.power.slayer.BreathPower;
+import eu.kurai.uhc.demonslayer.power.slayer.zenitsu.GodOfCelestialFirePower;
+import eu.kurai.uhc.demonslayer.power.slayer.zenitsu.HearPower;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.SlayerTeam;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -16,11 +17,14 @@ import org.bukkit.entity.Player;
 public final class ZenitsuRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public ZenitsuRole() {
         this.gender = Gender.MALE;
+        this.rank = Rank.A;
 
-        registerPower(new SoufflePower());
+        registerPower(new HearPower());
+        registerPower(new BreathPower(this, new DivineSpeedPower(), new GodOfCelestialFirePower()));
     }
 
     @Override
@@ -32,16 +36,5 @@ public final class ZenitsuRole extends AbstractDSRole {
     public void onDistribute(Player player) {
         IProfile profile = IProfile.of(player.getUniqueId());
         profile.setSpeedBuffer(profile.getSpeedBuffer() + 0.04F);
-    }
-
-    @Getter
-    private static final class SoufflePower extends AbstractParentPower {
-        private final String name;
-
-        public SoufflePower() {
-            this.name = "&a&lSOUFFLE";
-            registerChild(new DivineSpeedPower());
-            registerChild(new GodOfCelestialFirePower());
-        }
     }
 }

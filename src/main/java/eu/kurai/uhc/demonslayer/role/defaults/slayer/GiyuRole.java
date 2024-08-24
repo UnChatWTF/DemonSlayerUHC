@@ -1,10 +1,9 @@
-package eu.unchat.uhc.demonslayer.role.defaults.slayer;
+package eu.kurai.uhc.demonslayer.role.defaults.slayer;
 
-import eu.unchat.uhc.API;
-import eu.unchat.uhc.demonslayer.team.defaults.SlayerTeam;
-import eu.unchat.uhc.power.item.AbstractItemPower;
+import eu.kurai.uhc.demonslayer.role.AbstractDSRole;
+import eu.kurai.uhc.demonslayer.team.defaults.SlayerTeam;
+import eu.unchat.uhc.power.defaults.AbstractItemPower;
 import eu.unchat.uhc.profile.IProfile;
-import eu.unchat.uhc.demonslayer.role.AbstractDSRole;
 import eu.unchat.uhc.role.Role;
 import eu.unchat.uhc.util.ItemBuilder;
 import lombok.Getter;
@@ -18,9 +17,11 @@ import org.bukkit.inventory.ItemStack;
 public final class GiyuRole extends AbstractDSRole {
 
     private final Gender gender;
+    private final Rank rank;
 
     public GiyuRole() {
         this.gender = Gender.MALE;
+        this.rank = Rank.A;
 
         registerPower(new DeadCalmPower());
         registerPower(new RisingTidePower());
@@ -37,58 +38,57 @@ public final class GiyuRole extends AbstractDSRole {
 
     @Getter
     private static final class DeadCalmPower extends AbstractItemPower {
-        private final String name;
+        private final String name, identifier;
 
-        private final int initialCooldown, initialUses;
-
-        private final ClickType clickType;
+        private final InteractionType interactionType = InteractionType.RIGHT_CLICK;
 
         public DeadCalmPower() {
             this.name = "&a&lDEAD CALM";
-            this.initialCooldown = 0;
-            this.initialUses = 1;
-            this.clickType = ClickType.RIGHT_CLICK;
+            this.identifier = "dead_calm";
+
+            this.setInitialCooldown(0);
+            this.setInitialUses(1);
         }
 
         @Override
         public ItemStack getIcon() {
             return new ItemBuilder(Material.WATER_LILY)
-                    .name(name)
+                    .name(formatName())
                     .glowing(true)
                     .asItemStack();
         }
 
         @Override
-        public Result onClick(final Player player, final boolean right) {
-            return Result.SUCCESS;
+        public Result onInteract(final Player player, final InteractionType interactionType) {
+            return Result.SUCCESSFUL;
         }
     }
 
     @Getter
     private static final class RisingTidePower extends AbstractItemPower {
-        private final String name;
+        private final String name, identifier;
 
-        private final int initialCooldown, initialUses;
 
-        private final ClickType clickType;
+        private final InteractionType interactionType = InteractionType.RIGHT_CLICK;
 
         public RisingTidePower() {
             this.name = "&a&lRISING TIDE";
-            this.initialCooldown = 10 * 60;
-            this.initialUses = -1;
-            this.clickType = ClickType.RIGHT_CLICK;
+            this.identifier = "rising_tide";
+
+            this.setInitialCooldown(10 * 60);
+            this.setInitialUses(-1);
         }
 
         @Override
         public ItemStack getIcon() {
             return new ItemBuilder(Material.NETHER_STAR)
-                    .name(name)
+                    .name(formatName())
                     .asItemStack();
         }
 
         @Override
-        public Result onClick(final Player player, final boolean right) {
-            return Result.SUCCESS;
+        public Result onInteract(final Player player, final InteractionType interactionType) {
+            return Result.SUCCESSFUL;
         }
     }
 }
